@@ -5,7 +5,10 @@ FROM python:3.9-slim-buster
 WORKDIR /app
 
 # Install ffmpeg, build tools and other necessary packages
-RUN apt-get update && apt-get install -y ffmpeg build-essential libopus-dev libogg-dev && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ffmpeg build-essential libopus-dev libogg-dev python3-dev && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip and install setuptools and wheel
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
 # Copy the current directory contents into the container at /app
 COPY . /app
