@@ -4,8 +4,8 @@ FROM python:3.9-slim-buster
 # Set the working directory in the container
 WORKDIR /app
 
-# Install ffmpeg and other necessary packages
-RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+# Install ffmpeg, build tools and other necessary packages
+RUN apt-get update && apt-get install -y ffmpeg build-essential libopus-dev libogg-dev && rm -rf /var/lib/apt/lists/*
 
 # Copy the current directory contents into the container at /app
 COPY . /app
@@ -18,5 +18,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Run bot.py when the container launches
 CMD ["python3", "bot.py"]
-
-
